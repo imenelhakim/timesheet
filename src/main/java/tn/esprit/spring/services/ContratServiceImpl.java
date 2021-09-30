@@ -15,7 +15,7 @@ public class ContratServiceImpl implements IContratService {
 	@Autowired
 	ContratRepository contratRepository;
 
-
+//raed
 	public List<Contrat> getAllContrats() {
 		return (List<Contrat>) contratRepository.findAll();
 	}
