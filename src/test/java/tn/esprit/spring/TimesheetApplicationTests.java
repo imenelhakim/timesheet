@@ -16,6 +16,8 @@ class TimesheetApplicationTests {
 	private static final Logger l = Logger.getLogger(TimesheetApplication.class);
 	@Autowired
 	ControllerEntrepriseImpl entrepriseControl;
+	@Autowired
+	ControllerEmployeImpl employeControl;
 
 	@Test
 	void contextLoads() {
@@ -43,5 +45,9 @@ class TimesheetApplicationTests {
 		for (Departement dep : entreprise.getDepartements()) {
 			l.info(dep.getName());
 		}
+		employeControl.mettreAjourEmailByEmployeIdJPQL("a@gmail.com", 1);
+		// employeControl.deleteAllContratJPQL();
+		l.info(employeControl.getSalaireByEmployeIdJPQL(1));
+		l.info(employeControl.getSalaireMoyenByDepartementId(1));
 	}
 }
