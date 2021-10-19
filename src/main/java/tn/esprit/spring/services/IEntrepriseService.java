@@ -10,8 +10,14 @@ public interface IEntrepriseService {
 	public int ajouterEntreprise(Entreprise entreprise);
 	public int ajouterDepartement(Departement dep);
 	void affecterDepartementAEntreprise(int depId, int entrepriseId);
+	
+
+	//IIIMEEEENN
 	List<String> getAllDepartementsNamesByEntreprise(int entrepriseId);
 	public void deleteEntrepriseById(int entrepriseId);
 	public void deleteDepartementById(int depId);
+	//IIIMEEEENN
+	
+	
 	public Entreprise getEntrepriseById(int entrepriseId);
 }
