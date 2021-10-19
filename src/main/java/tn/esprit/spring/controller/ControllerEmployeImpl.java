@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.Pattern;
+
 
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
@@ -22,11 +22,14 @@ import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IEmployeService;
 
 
+
 @Scope(value = "session")
 @Controller(value = "employeController")
 @ELBeanName(value = "employeController")
 @Join(path = "/", to = "/login.jsf")
 public class ControllerEmployeImpl  {
+	
+
 
 	@Autowired
 	IEmployeService employeService;
@@ -77,22 +80,33 @@ public class ControllerEmployeImpl  {
 
 	public String addEmploye() {
 
+	try {
+		
 		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
 
 		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role)); 
-		return "null"; 
+		return "null";
+		}
+	catch(Exception e) {
+		return "erreur in addEmploye()"+ e;
+	}
 	}  
 
 	public String removeEmploye(int employeId) {
+		
 		String navigateTo = "null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		try {	if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
 
 		employeService.deleteEmployeById(employeId);
-		return navigateTo; 
+		return navigateTo; }
+		catch(Exception e) {
+			return "erreur in removeEmploye():"+ e;
+		}
 	} 
 
 	public String displayEmploye(Employe empl) 
 	{
+		
 		String navigateTo = "null";
 		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
 
@@ -111,6 +125,7 @@ public class ControllerEmployeImpl  {
 
 	public String updateEmploye() 
 	{ 
+		
 		String navigateTo = "null";
 		
 		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
@@ -198,6 +213,7 @@ public class ControllerEmployeImpl  {
 	public String getEmployePrenomById(int employeId) {
 		return employeService.getEmployePrenomById(employeId);
 	}
+	
 
 	public void deleteEmployeById(int employeId) {
 		employeService.deleteEmployeById(employeId);
@@ -312,5 +328,9 @@ public class ControllerEmployeImpl  {
 	public void setAuthenticatedUser(Employe authenticatedUser) {
 		this.authenticatedUser = authenticatedUser;
 	}
+
+	
+	
+	
 
 }

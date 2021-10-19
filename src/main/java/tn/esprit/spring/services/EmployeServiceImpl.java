@@ -104,6 +104,10 @@ public class EmployeServiceImpl implements IEmployeService {
 		return employeManagedEntity.getPrenom();
 	}
 	 
+	public String getEmployeEmailById(int employeId) {
+		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		return employeManagedEntity.getEmail();
+	}
 	public void deleteEmployeById(int employeId)
 	{
 		Employe employe = employeRepository.findById(employeId).get();
