@@ -2,6 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
@@ -28,7 +29,7 @@ public interface IEmployeService {
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise);
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
 	public void deleteAllContratJPQL();
-	public float getSalaireByEmployeIdJPQL(int employeId);
+	public Optional<Float> getSalaireByEmployeIdJPQL(int employeId);
 	public Double getSalaireMoyenByDepartementId(int departementId);
 	public List<Employe> getAllEmployes();
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 

@@ -2,6 +2,7 @@ package tn.esprit.spring.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -149,7 +150,7 @@ public class RestControlEmploye {
     // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
     @GetMapping(value = "getSalaireByEmployeIdJPQL/{idemp}")
     @ResponseBody
-	public float getSalaireByEmployeIdJPQL(@PathVariable("idemp")int employeId) {
+	public Optional<Float> getSalaireByEmployeIdJPQL(@PathVariable("idemp")int employeId) {
 		return iemployeservice.getSalaireByEmployeIdJPQL(employeId);
 	}
 

@@ -1,6 +1,7 @@
 package tn.esprit.spring.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -46,7 +47,7 @@ public interface EmployeRepository extends CrudRepository<Employe, Integer>  {
     public void deleteAllContratJPQL();
     
     @Query("select c.salaire from Contrat c join c.employe e where e.id=:employeId")
-    public float getSalaireByEmployeIdJPQL(@Param("employeId")int employeId);
+    public Optional<Float> getSalaireByEmployeIdJPQL(@Param("employeId")int employeId);
     
     
     @Query("Select "

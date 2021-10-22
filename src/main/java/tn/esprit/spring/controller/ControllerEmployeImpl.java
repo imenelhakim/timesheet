@@ -2,6 +2,7 @@ package tn.esprit.spring.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -231,7 +232,7 @@ public class ControllerEmployeImpl  {
 
 	}
 
-	public float getSalaireByEmployeIdJPQL(int employeId) {
+	public Optional<Float> getSalaireByEmployeIdJPQL(int employeId) {
 		return employeService.getSalaireByEmployeIdJPQL(employeId);
 	}
 
