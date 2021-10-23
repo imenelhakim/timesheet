@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Pattern;
 
 @Entity
 public class Contrat implements Serializable {
@@ -26,8 +25,6 @@ public class Contrat implements Serializable {
 	
 	private String typeContrat;
 	
-	
-	private float telephone;
 	
 	@OneToOne
 	private Employe employe;
