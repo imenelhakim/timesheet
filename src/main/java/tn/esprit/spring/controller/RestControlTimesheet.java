@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +29,7 @@ public class RestControlTimesheet {
 	
 	@PostMapping("/ajouterMission")
 	@ResponseBody
-	public int ajouterMission(@RequestBody Mission mission) {
+	public int ajouterMission(Mission mission) {
 		itimesheetservice.ajouterMission(mission);
 		return mission.getId();
 	}

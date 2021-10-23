@@ -3,7 +3,11 @@ package tn.esprit.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
@@ -11,7 +15,8 @@ import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
 
-@Controller
+@RestController
+@RequestMapping("/entreprise")
 public class ControllerEntrepriseImpl{
 
 	@Autowired
@@ -28,10 +33,6 @@ public class ControllerEntrepriseImpl{
 	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
 		ientrepriseservice.affecterDepartementAEntreprise(depId, entrepriseId);
 	}
-	public void deleteEntrepriseById(int entrepriseId)
-	{
-		ientrepriseservice.deleteEntrepriseById(entrepriseId);
-	}
 	public Entreprise getEntrepriseById(int entrepriseId) {
 
 		return ientrepriseservice.getEntrepriseById(1);
@@ -41,11 +42,20 @@ public class ControllerEntrepriseImpl{
 		return ientrepriseservice.ajouterDepartement(dep);
 	}
 	
-	public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
+
+	@GetMapping("/getDepListById/{entrepriseId}")
+	public List<String> getAllDepartementsNamesByEntreprise(@PathVariable int entrepriseId) {
 		return ientrepriseservice.getAllDepartementsNamesByEntreprise(entrepriseId);
 	}
-
-	public void deleteDepartementById(int depId) {
+	
+	@DeleteMapping("/deleteEnt/{entrepriseId}")
+	public void deleteEntrepriseById(@PathVariable int entrepriseId)
+	{
+		ientrepriseservice.deleteEntrepriseById(entrepriseId);
+	}
+	
+	@DeleteMapping("/deleteDep/{depId}")
+	public void deleteDepartementById(@PathVariable int depId) {
 		ientrepriseservice.deleteDepartementById(depId);
 
 	}

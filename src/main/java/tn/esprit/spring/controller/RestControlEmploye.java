@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +35,7 @@ public class RestControlEmploye {
 	
 	@PostMapping("/ajouterEmployer")
 	@ResponseBody
-	public Employe ajouterEmploye(@RequestBody Employe employe)
+	public Employe ajouterEmploye(Employe employe)
 	{
 		iemployeservice.addOrUpdateEmploye(employe);
 		return employe;
@@ -63,7 +62,7 @@ public class RestControlEmploye {
 
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
-	public int ajouterContrat(@RequestBody Contrat contrat) {
+	public int ajouterContrat(Contrat contrat) {
 		iemployeservice.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
