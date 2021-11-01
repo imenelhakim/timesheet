@@ -48,10 +48,10 @@ class TimesheetApplicationTests {
 		  for(String departementName : departements) { l.info(departementName); }
 		  Entreprise entreprise = entrepriseControl.getEntrepriseById(1); 
 		  for (Departement dep : entreprise.getDepartements()) { l.info(dep.getName()); }
-		  employeControl.mettreAjourEmailByEmployeIdJPQL("a@gmail.com", 11); 
-		  employeControl.deleteAllContratJPQL();
+		  employeControl.mettreAjourEmailByEmployeIdJPQL("a@gmail.com", 1); 
+		 // employeControl.deleteAllContratJPQL();
 		  l.info(employeControl.getSalaireByEmployeIdJPQL(1));
-		  l.info(employeControl.getSalaireMoyenByDepartementId(3));
+		  l.info(employeControl.getSalaireMoyenByDepartementId(1));
 		 //////***********************************************************************************************naj
 		 Employe employe =new Employe("arij", "mansour", "arijmansour@email.com","123ingenieur", true, Role.INGENIEUR);
 		 Employe admin =new Employe("hamma", "elhami", "hammaelhami@email.com","123admin", true, Role.ADMINISTRATEUR);
