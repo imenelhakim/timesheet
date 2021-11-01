@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Built-By: hp
 Build-Jdk: 16.0.2
 Implementation-Title: timesheet
-Implementation-Version: 1.0
+Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: tn.esprit.spring
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
  -starter-parent/timesheet
