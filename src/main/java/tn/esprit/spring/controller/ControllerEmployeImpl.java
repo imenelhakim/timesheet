@@ -22,14 +22,11 @@ import tn.esprit.spring.entities.Timesheet;
 import tn.esprit.spring.services.IEmployeService;
 
 
-
 @Scope(value = "session")
 @Controller(value = "employeController")
 @ELBeanName(value = "employeController")
 @Join(path = "/", to = "/login.jsf")
 public class ControllerEmployeImpl  {
-	
-
 
 	@Autowired
 	IEmployeService employeService;
@@ -50,7 +47,7 @@ public class ControllerEmployeImpl  {
 
 	private Integer employeIdToBeUpdated; // getter et setter
 
-
+    String  urlWelcomPage="/login.xhtml?faces-redirect=true";
 	public String doLogin() {
 
 		String navigateTo = "null";
@@ -74,41 +71,30 @@ public class ControllerEmployeImpl  {
 	{
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	
-	return "/login.xhtml?faces-redirect=true";
+	return urlWelcomPage;
 	}
 
 
 	public String addEmploye() {
 
-	try {
-		
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return urlWelcomPage;
 
 		employeService.addOrUpdateEmploye(new Employe(nom, prenom, email, password, actif, role)); 
-		return "null";
-		}
-	catch(Exception e) {
-		return "erreur in addEmploye()"+ e;
-	}
+		return "null"; 
 	}  
 
 	public String removeEmploye(int employeId) {
-		
 		String navigateTo = "null";
-		try {	if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return urlWelcomPage;
 
 		employeService.deleteEmployeById(employeId);
-		return navigateTo; }
-		catch(Exception e) {
-			return "erreur in removeEmploye():"+ e;
-		}
+		return navigateTo; 
 	} 
 
 	public String displayEmploye(Employe empl) 
 	{
-		
 		String navigateTo = "null";
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return urlWelcomPage;
 
 
 		this.setPrenom(empl.getPrenom());
@@ -125,10 +111,9 @@ public class ControllerEmployeImpl  {
 
 	public String updateEmploye() 
 	{ 
-		
 		String navigateTo = "null";
 		
-		if (authenticatedUser==null || !loggedIn) return "/login.xhtml?faces-redirect=true";
+		if (authenticatedUser==null || !loggedIn) return urlWelcomPage;
 
 		employeService.addOrUpdateEmploye(new Employe(employeIdToBeUpdated, nom, prenom, email, password, actif, role)); 
 
@@ -213,7 +198,6 @@ public class ControllerEmployeImpl  {
 	public String getEmployePrenomById(int employeId) {
 		return employeService.getEmployePrenomById(employeId);
 	}
-	
 
 	public void deleteEmployeById(int employeId) {
 		employeService.deleteEmployeById(employeId);
@@ -328,9 +312,5 @@ public class ControllerEmployeImpl  {
 	public void setAuthenticatedUser(Employe authenticatedUser) {
 		this.authenticatedUser = authenticatedUser;
 	}
-
-	
-	
-	
 
 }

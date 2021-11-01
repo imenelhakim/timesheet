@@ -12,49 +12,28 @@ import tn.esprit.spring.entities.Timesheet;
 
 public interface IEmployeService {
 	
-	/*najla*/
 	public Employe authenticate(String login, String password) ;
-	public void mettreAjourEmailByEmployeId(String email, int employeId);
-	public void affecterEmployeADepartement(int employeId, int depId);
-	public void desaffecterEmployeDuDepartement(int employeId, int depId);
-	public String getEmployeEmailById(int employeId);
-	/*   */
+	 
 	
-	
-	
-	/*imen   */
+	public String mettreAjourEmailByEmployeId(String email, int employeId);
+	public String affecterEmployeADepartement(int employeId, int depId);
+	public String desaffecterEmployeDuDepartement(int employeId, int depId);
 	public int ajouterContrat(Contrat contrat);
 	public void affecterContratAEmploye(int contratId, int employeId);
 	public String getEmployePrenomById(int employeId);
 	public void deleteEmployeById(int employeId);
-	
-	
-	
-	
-	/* ichrak   */
-	
 	public void deleteContratById(int contratId);
 	public int getNombreEmployeJPQL();
 	public List<String> getAllEmployeNamesJPQL();
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise);
-	
-	
-	
-	/*   raed*/
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId);
 	public void deleteAllContratJPQL();
 	public float getSalaireByEmployeIdJPQL(int employeId);
 	public Double getSalaireMoyenByDepartementId(int departementId);
-	
-	
-	
-	
-	/*   najd*/
 	public List<Employe> getAllEmployes();
-	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 
-	Date dateDebut, Date dateFin);
+	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission,Date dateDebut, Date dateFin);
+
 	int addOrUpdateEmploye(Employe employe);
-	/*   */
 	
 	
 	

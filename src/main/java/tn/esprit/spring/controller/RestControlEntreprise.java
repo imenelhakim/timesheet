@@ -2,8 +2,6 @@ package tn.esprit.spring.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,26 +12,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
+import tn.esprit.spring.services.IContratService;
+import tn.esprit.spring.services.IDepartementService;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 import tn.esprit.spring.services.ITimesheetService;
 
 @RestController
-//@Slf4j
 public class RestControlEntreprise {
 
-	private static final Logger logger = (Logger) LoggerFactory.getLogger(RestControlEntreprise.class);
+	
 	@Autowired
 	IEmployeService iemployeservice;
 	@Autowired
 	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
+	@Autowired
+	IDepartementService iDepartementService;
+	@Autowired
+	IContratService iContratService;
 	
 	// Ajouter Entreprise : http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
-	//{"id":1,"name":"SSII Consulting","raisonSocial":"Cite El Ghazela"}
+	
 
 	@PostMapping("/ajouterEntreprise")
 	@ResponseBody
@@ -65,7 +69,7 @@ public class RestControlEntreprise {
 	}
     
     // http://localhost:8081/SpringMVC/servlet/ajouterDepartement
- 	//{"id":1,"name":"Telecom"}
+ 
 
  	@PostMapping("/ajouterDepartement")
  	@ResponseBody
@@ -78,6 +82,19 @@ public class RestControlEntreprise {
     @ResponseBody
 	public List<String> getAllDepartementsNamesByEntreprise(@PathVariable("identreprise") int entrepriseId) {
 		return ientrepriseservice.getAllDepartementsNamesByEntreprise(entrepriseId);
+	}
+	 // http://localhost:8081/SpringMVC/servlet/getAllDepartements
+    @GetMapping(value = "getAllDepartements")
+    @ResponseBody
+	public List<Departement> getAllDepartements() {
+		return iDepartementService.getAllDepartements();
+	}
+    
+    // http://localhost:8081/SpringMVC/servlet/getAllContrats
+    @GetMapping(value = "getAllContrats")
+    @ResponseBody
+    public List<Contrat> getAllContrats() {
+		return iContratService.getAllContrats();
 	}
 
     // URL : http://localhost:8081/SpringMVC/servlet/deleteDepartementById/3
