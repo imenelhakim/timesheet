@@ -46,7 +46,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 
-	public String mettreAjourEmailByEmployeId(String email, int employeId) {
+	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Optional<Employe> employeEEE=employeRepository.findById(employeId);
 		
 		if(employeEEE.isPresent()) {
@@ -54,11 +54,8 @@ public class EmployeServiceImpl implements IEmployeService {
 		employe.setEmail(email);
 		
 		employeRepository.save(employe);
-		return "email updated";
-		}
 		
-		else 
-			return "erreur in mettre ajourEmailByEmployeId";
+		}
 		
 	
 	}
@@ -66,20 +63,15 @@ public class EmployeServiceImpl implements IEmployeService {
 	
 
 	@Transactional	
-	public String affecterEmployeADepartement(int employeId, int depId)  {
+	public void affecterEmployeADepartement(int employeId, int depId)  {
 		
      Optional<Departement> departement =deptRepoistory.findById(depId);
      Optional<Employe> employeEEE=employeRepository.findById(employeId);
 		
 		if(departement.isPresent() && employeEEE.isPresent()){
-
-		Departement depManagedEntity = departement.get();
-		
-		
+	Departement depManagedEntity = departement.get();		
 		Employe employeManagedEntity = employeEEE.get();
-
 		if(depManagedEntity.getEmployes() == null){
-
 			List<Employe> employes = new ArrayList<>();
 			employes.add(employeManagedEntity);
 			depManagedEntity.setEmployes(employes);
@@ -87,12 +79,9 @@ public class EmployeServiceImpl implements IEmployeService {
 
 			depManagedEntity.getEmployes().add(employeManagedEntity);
 		}
-
 		// à ajouter? 
-		deptRepoistory.save(depManagedEntity); 
-		 return "operation complited";
-		}else return "employe or department is not exist";
-
+		deptRepoistory.save(depManagedEntity); 	
+		}
 	}
 	@Transactional
 	public String desaffecterEmployeDuDepartement(int employeId, int depId)

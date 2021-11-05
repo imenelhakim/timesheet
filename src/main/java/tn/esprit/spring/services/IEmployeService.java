@@ -15,8 +15,8 @@ public interface IEmployeService {
 	public Employe authenticate(String login, String password) ;
 	 
 	
-	public String mettreAjourEmailByEmployeId(String email, int employeId);
-	public String affecterEmployeADepartement(int employeId, int depId);
+	public void mettreAjourEmailByEmployeId(String email, int employeId);
+	public void affecterEmployeADepartement(int employeId, int depId);
 	public String desaffecterEmployeDuDepartement(int employeId, int depId);
 	public int ajouterContrat(Contrat contrat);
 	public void affecterContratAEmploye(int contratId, int employeId);
