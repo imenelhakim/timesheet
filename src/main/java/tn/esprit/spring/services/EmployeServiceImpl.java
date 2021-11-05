@@ -66,10 +66,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 			depManagedEntity.getEmployes().add(employeManagedEntity);
 		}
-
-		// à ajouter? 
 		deptRepoistory.save(depManagedEntity); 
-
 	}
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
