@@ -1,5 +1,6 @@
 package tn.esprit.spring;
-
+import org.junit.Assert;
+import javax.transaction.Transactional;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +27,79 @@ class TimesheetApplicationTests {
 	@Autowired
 	RestControlEmploye RestemployeControl;
 	
-	@Test
+	  Entreprise ssiiConsulting = new Entreprise("SSII Consulting","Cite El Ghazela"); 
+	  Departement depTelecom = new Departement("Telecom");
+	  Departement depRH = new Departement("RH");
+	  Employe employe =new Employe("arij", "mansour", "arijmansour@email.com","123ingenieur", true, Role.INGENIEUR);
+		Employe admin =new Employe("hamma", "elhami", "hammaelhami@email.com","123admin", true, Role.ADMINISTRATEUR);
+	
+	
+	@Transactional
+    @Test
+    void testajouterEmploye(){
+    	l.info("you are in testajouterEmployer()");		
+		int employeId =employeControl.ajouterEmploye(employe);
+		int adminId=employeControl.ajouterEmploye(admin);
+        Assert.assertNotNull(employeControl.getEmployePrenomById(employeId));
+        Assert.assertNotNull(employeControl.getEmployePrenomById(adminId));
+        l.debug( "employe ajouté"+ employeId);
+    }
+	
+	@Transactional
+    @Test
+    void testaffecterEmployeADepartement(){
+		l.info("you are in testaffecterEmployeADepartement()");		
+		int employeId =employeControl.ajouterEmploye(employe);
+	    ssiiConsulting.addDepartement(depTelecom); 
+	    Assert.assertNotNull(employeControl.getEmployePrenomById(employeId));    
+		 int depTelecomId = entrepriseControl.ajouterDepartement(depTelecom);
+	     employeControl.affecterEmployeADepartement(employeId, depTelecomId);
+	 l.debug( "employe "+employeId + "affecter"+" a departement"+ depTelecomId);
+    }
+	
+	@Transactional
+    @Test
+    void testdesaffecterEmployeADepartement(){
+		
+		int employeId=employeControl.ajouterEmploye(employe);
+	    ssiiConsulting.addDepartement(depTelecom); 
+	    Assert.assertNotNull(employeControl.getEmployePrenomById(employeId));    
+		int depTelecomId = entrepriseControl.ajouterDepartement(depTelecom);
+		 employeControl.affecterEmployeADepartement(employeId, depTelecomId);
+	     employeControl.desaffecterEmployeDuDepartement(employeId, depTelecomId);
+		l.debug( "employe " + employeId + "desaffecter" + "a departement"+ depTelecomId);   
+		}
+	
+	@Transactional
+    @Test
+    void testmettreAjourEmailByEmployeId(){	
+    Assert.assertNotNull(employeControl.getEmployePrenomById(1));  
+	employeControl.mettreAjourEmailByEmployeId("sara@gmail.com",1);
+	l.debug("l'email de " +  employeControl.getEmployePrenomById(1) + "est modifier" );
+
+	}
+	
+	
+	@Transactional
+    @Test
+    void testgetAllDepartements(){	
+    List<Departement> listAlldepartements= entrepriseControl.getAllDepartements();
+    Assert.assertNotNull(entrepriseControl.getAllDepartements());
+	    for(Departement departement : listAlldepartements) { 
+	    l.debug("le departement id  :" + departement.getId() +"et le nom: " + departement.getName());}
+	    }
+	@Transactional
+    @Test
+    void testgetAllContrats(){	
+   
+   List<Contrat> listAllContrats =entrepriseControl.getAllContrats();
+   Assert.assertNotNull(entrepriseControl.getAllDepartements());
+	    for(Contrat contrat : listAllContrats) {
+	    	l.debug(contrat.getTypeContrat() + "" +contrat.getReference()+ ""+contrat.getDateDebut()+""+contrat.getSalaire()+""+contrat.getTelephone());
+	    	}
+	}
+	
+	/*@Test
 	void contextLoads() {
 
 		
@@ -53,25 +126,13 @@ class TimesheetApplicationTests {
 		  l.info(employeControl.getSalaireByEmployeIdJPQL(1));
 		  l.info(employeControl.getSalaireMoyenByDepartementId(1));
 		 //////***********************************************************************************************naj
-		 Employe employe =new Employe("arij", "mansour", "arijmansour@email.com","123ingenieur", true, Role.INGENIEUR);
-		 Employe admin =new Employe("hamma", "elhami", "hammaelhami@email.com","123admin", true, Role.ADMINISTRATEUR);
-		 int employeId =employeControl.ajouterEmploye(employe);
-		employeControl.ajouterEmploye(admin);
-		 l.info( "employe ajouté"+ employeId);
-	/*f1*/	employeControl.affecterEmployeADepartement(employeId, depTelecomId);
-		 l.info( "employe "+employeId + "affecter"+" a departement"+ depTelecomId);
-   /*f2*/	employeControl.desaffecterEmployeDuDepartement(employeId, depTelecomId);
-		 l.info( "employe " + employeId + "desaffecter" + "a departement"+ depTelecomId);
-  /*f3*/		employeControl.mettreAjourEmailByEmployeId("sara@gmail.com",1);
+		 
+		
+	
+   	
+  		
 	  
-  /*f4*/    List<Departement> listAlldepartements= entrepriseControl.getAllDepartements();
-	    for(Departement departement : listAlldepartements) { l.info(departement.getId() +" " + departement.getName());}
- /*f5*/    List<Contrat> listAllContrats =entrepriseControl.getAllContrats();
-	    for(Contrat contrat : listAllContrats) { l.info(contrat.getTypeContrat() + "" +contrat.getReference()+ ""+contrat.getDateDebut()+""+contrat.getSalaire()+""+contrat.getTelephone());}
-          //String email=admin.getEmail();
-         // String password=admin.getPassword();
- /*f6*/   //String login= employeControl.doLogin(){iemployeservice.authenticate(email, password);};
-		// l.info(login);
-	    
-	}
+
+       
+	}*/
 }
