@@ -12,7 +12,7 @@ services:
 
   timesheet:
   
-    image: timesheet
+    image: raedjarboui/timesheet
     build: ./
     restart: on-failure
     depends_on:
