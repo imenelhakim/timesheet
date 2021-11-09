@@ -117,6 +117,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				<finalName>timesheet-mysql</finalName>
 				</configuration>
 			</plugin>
 		</plugins>
