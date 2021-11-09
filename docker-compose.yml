@@ -1,0 +1,23 @@
+version: '2.2'
+
+services:
+
+  myapp-mysql:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=rout
+      - MYSQL_DATABASE=timesheet
+    ports:
+      - 3307:3306
+
+  timesheet:
+  
+    image: najladaoud/dockertimesheet
+    build: ./
+    restart: on-failure
+    depends_on:
+      - myapp-mysql
+    ports:
+      - 8083:8083
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://myapp-mysql:3306/timesheet?autoReconnect=true&useSSL=false
