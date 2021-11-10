@@ -1,0 +1,23 @@
+version: '2.2'
+
+services:
+
+  myapp-mysql:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=20020059
+      - MYSQL_DATABASE=timesheet-spring
+    ports:
+      - 3307:3306
+
+  timesheet:
+    container_name: timesheet-container
+    image: $registry:$BUILD_NUMBER
+    build: ./
+    restart: on-failure
+    depends_on:
+      - myapp-mysql
+    ports:
+      - 8083:8083
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://myapp-mysql:3306/timesheet-spring?autoReconnect=true&useSSL=false

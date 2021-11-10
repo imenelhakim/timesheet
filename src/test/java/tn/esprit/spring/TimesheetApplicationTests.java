@@ -2,10 +2,12 @@ package tn.esprit.spring;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import tn.esprit.spring.controller.ControllerEmployeImpl;
 import tn.esprit.spring.controller.ControllerEntrepriseImpl;
 import tn.esprit.spring.entities.Departement;
@@ -13,7 +15,9 @@ import tn.esprit.spring.entities.Entreprise;
 
 @SpringBootTest
 class TimesheetApplicationTests {
-	private static final Logger l = Logger.getLogger(TimesheetApplication.class);
+	private static final Logger l = LogManager.getLogger(TimesheetApplication.class);
+
+	// private static final Logger l = Logger.getLogger(TimesheetApplication.class);
 	@Autowired
 	ControllerEntrepriseImpl entrepriseControl;
 	@Autowired
@@ -46,8 +50,9 @@ class TimesheetApplicationTests {
 			l.info(dep.getName());
 		}
 		employeControl.mettreAjourEmailByEmployeIdJPQL("a@gmail.com", 1);
-		// employeControl.deleteAllContratJPQL();
+		employeControl.deleteAllContratJPQL();
 		l.info(employeControl.getSalaireByEmployeIdJPQL(1));
 		l.info(employeControl.getSalaireMoyenByDepartementId(1));
+
 	}
 }
