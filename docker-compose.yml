@@ -2,13 +2,7 @@ version: '2.2'
 
 services:
 
-  myapp-mysql:
-    image: mysql:5.6
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=timesheet
-    ports:
-      - 3307:3306
+  
 
   timesheet:
   
@@ -21,3 +15,11 @@ services:
       - 8083:8083
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://myapp-mysql:3306/timesheet?autoReconnect=true&useSSL=false
+
+  myapp-mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=timesheet
+    ports:
+      - 3307:3306    
